@@ -1,0 +1,80 @@
+---
+title: "hw01-lowrycb"
+author: "Cass Lowry"
+date: "2/24/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Change for your wd
+setwd("~/Dropbox/CUNY/Stats/hw/hw01-lowrycb")
+```
+
+## 1 Arithmetic 
+
+```{r Arithmetic}
+x = (1/3) + (1/4)
+print(x)
+
+x = (2^10) + 1
+print(x)
+
+f = 440
+x = 1127 * log(1 + (f/700))
+print(x)
+
+a = 2
+b = 4
+c = -4
+x = (-b + sqrt(b^2 - (4*a*c))) / 2*a
+print(x)
+```
+
+## 2 Categorical data
+
+```{r Categorical}
+df = read.csv("NYC.csv")
+head(df)
+
+# How many times did employees at the three department stores use r in the word “fourth” in the emphatic condition?
+
+dfa = df[df$word == "fouRth",]
+emphatic_fourth = xtabs(dfa$r ~ dfa$store + dfa$emphasis)
+print(emphatic_fourth)
+
+# Klein's
+print(emphatic_fourth[1,1])
+
+# Macy's
+print(emphatic_fourth[2,1])
+
+# Saks
+print(emphatic_fourth[3,1])
+```
+
+``` {r}
+# What percentage of the time did employees at S. Klein’s use r in the word “floor”?
+
+dfa = df[df$store == "Klein's" & df$word == "flooR",]
+
+x = sum(dfa$r) / nrow(dfa)
+print(x)
+```
+## Ratio data
+
+```{r Ratio}
+df = read.csv("VOT.tsv", sep = "\t")
+
+# Sample quartiles for VOT
+summary(df$vot)
+
+# The mean of Spanish speakers’ VOTs
+dfa = df[df$language == "spanish",]
+mean(dfa$vot)
+
+# The (sample) standard deviation of English speakers’ VOTs
+dfa = df[df$language == "english",] 
+sd(dfa$vot)
+```
